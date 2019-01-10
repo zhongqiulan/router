@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body ng-app="myApp" >
+<div ng-controller="AccordionDemoCtrl">
+    <script type="text/ng-template" id="group-template.html">
+        <div class="panel-heading">
+            <h4 class="panel-title" style="color:#fa39c3">
+                <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
+          <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
+            {{heading}}
+          </span>
+                </a>
+            </h4>
+        </div>
+        <div class="panel-collapse collapse" uib-collapse="!isOpen">
+            <div class="panel-body" style="text-align: right" ng-transclude></div>
+        </div>
+    </script>
+    <uib-accordion close-others="oneAtATime">
+        <div uib-accordion-group class="panel-default" is-open="status.open" template-url="group-template.html">
+            <uib-accordion-heading>
+                Custom template with custom header template <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            </uib-accordion-heading>
+            <div>dddd</div>
+            World
+        </div>
+
+        <div uib-accordion-group class="panel-default" is-open="status.open">
+            <uib-accordion-heading>
+                I can have markup, too! <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            </uib-accordion-heading>
+            This is just some content to illustrate fancy headings.
+        </div>
+    </uib-accordion>
+</div>
+<script src="node_modules/angular/angular.js"></script>
+<script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+<script>
+    angular.module('myApp', ['ui.bootstrap']).controller('AccordionDemoCtrl', function ($scope) {
+        $scope.oneAtATime = true;
+        $scope.status = {
+            open:false
+        };
+    });
+</script>
+</body>
+
+</html>
